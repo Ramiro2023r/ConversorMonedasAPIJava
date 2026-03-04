@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class ConversorMonedasApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ConversorMonedasApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ConversorMonedasApiApplication.class, args);
+    }
 
 }
