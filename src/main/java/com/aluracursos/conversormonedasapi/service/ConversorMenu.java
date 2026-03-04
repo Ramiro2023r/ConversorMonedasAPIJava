@@ -36,12 +36,39 @@ public class ConversorMenu implements CommandLineRunner {
             ************************************
             """);
 
+            while (!scanner.hasNextInt()) {
+                System.out.println("❌ Debes ingresar un número válido.");
+                scanner.next();
+            }
             opcion = scanner.nextInt();
+
+            if (opcion < 1 || opcion > 7) {
+                System.out.println("❌ Opción fuera de rango.");
+                continue;
+            }
 
             if (opcion == 7) break;
 
-            System.out.println("Ingrese el valor que deseas convertir:");
-            double cantidad = scanner.nextDouble();
+            double cantidad;
+
+            while (true) {
+                System.out.println("Ingrese el valor que deseas convertir:");
+
+                if (scanner.hasNextDouble()) {
+                    cantidad = scanner.nextDouble();
+
+                    if (cantidad <= 0) {
+                        System.out.println("❌ El valor debe ser mayor que cero.");
+                        continue;
+                    }
+
+                    break;
+
+                } else {
+                    System.out.println("❌ Entrada inválida. Debes ingresar un número.");
+                    scanner.next(); // limpia la entrada incorrecta
+                }
+            }
 
             String base = "";
             String destino = "";
@@ -54,6 +81,10 @@ public class ConversorMenu implements CommandLineRunner {
                 case 5 -> { base = "USD"; destino = "COP"; }
                 case 6 -> { base = "COP"; destino = "USD"; }
                 default -> System.out.println("Opción inválida");
+            }
+            if (base.isEmpty() || destino.isEmpty()) {
+                System.out.println("Opción inválida.");
+                continue;
             }
 
             double resultado = service.convertir(base, destino, cantidad);
